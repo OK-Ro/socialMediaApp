@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .status-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #007bff;
+            
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+        }
+
+        .message {
+            margin-top: 20px;
+            color: #666;
+        }
+
+        p#status-message {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .login-button {
+            margin-top: 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="status-icon">📧</a>
+        <h1>Email Verification Status</h1>
+        <div class="message">
+            <p id="status-message">
+                <!-- This is where the status message will be displayed -->
+            </p>
+        </div>
+        <a href="http://127.0.0.1:3000/login" id="btn" class="login-button">Login</a>
+
+
+    </div>
+    <script>
+        // JavaScript code to handle displaying the status message
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get("status");
+            const message = urlParams.get("message");
+            const statusMessageElement = document.getElementById("status-message");
+
+            if (status === "success") {
+                statusMessageElement.innerText = message;
+                statusMessageElement.className = "success";
+            } else if (status === "error") {
+                statusMessageElement.innerText = message;
+                statusMessageElement.className = "error";
+            } else {
+                statusMessageElement.innerText = "An unexpected error occurred.";
+                statusMessageElement.className = "error";
+            }
+        });
+    </script>
+</body>
+</html>
